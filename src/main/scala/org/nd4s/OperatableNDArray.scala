@@ -17,7 +17,7 @@
  *
  */
 
-package org.nd4j.api
+package org.nd4s
 
 import org.nd4j.linalg.api.complex.{IComplexNDArray, IComplexNumber}
 import org.nd4j.linalg.api.ndarray.INDArray
@@ -105,6 +105,12 @@ trait OperatableNDArray[A <: INDArray] {
   def get[B](i: Int, j: Int)(implicit ev:NDArrayEvidence[A,B]): B = ev.get(underlying,i, j)
 
   def get[B](indices: Int*)(implicit ev:NDArrayEvidence[A,B]): B = ev.get(underlying,indices: _*)
+
+  def apply[B](i: Int)(implicit ev:NDArrayEvidence[A,B]): B = get(i)
+
+  def apply[B](i: Int, j: Int)(implicit ev:NDArrayEvidence[A,B]): B = get(i,j)
+
+  def apply[B](indices: Int*)(implicit ev:NDArrayEvidence[A,B]): B = get(indices: _*)
 
   def get[B](indices: Array[Int])(implicit ev:NDArrayEvidence[A,B]): B = ev.get(underlying,indices: _*)
 
